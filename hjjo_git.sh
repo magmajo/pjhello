@@ -52,17 +52,12 @@ echo '''
 ######################################################################
 _sMyFile=${0}
 _sCommand=${1}
-_sProjectName=${2}
-_sPackageLevel=${3}  # default/web
+_sRepositoryUrl=${2}
 
 ####################################################################
 # define
 ####################################################################
 _PREFIX_MESSAGE=[${_sMyFile}]
-_WORKING_DIR=/c/projects/openalpr
-_OPENALPR_ROOT=${PWD}
-_TESSERACT_ROOT=${_OPENALPR_ROOT}/maketrain/tesseract
-_MAKEOCR_ROOT=${_OPENALPR_ROOT}/maketrain/train_ocr
 
 ####################################################################
 # export
@@ -71,22 +66,27 @@ _MAKEOCR_ROOT=${_OPENALPR_ROOT}/maketrain/train_ocr
 
 
 ####################################################################
-# setp3_train_ocr
+# push_repository
 ####################################################################
-create_project()
+push_repository()
 {
-	bower init
-	
-	if [ ${_sPackageLevel} = "default" ]; then
-	  bower install jquery
-		bower install jquery-ui
-	elif [ ${_sPackageLevel} = "web" ]; then
-	  echo 'not support web command'
-	else 
-	  echo "${_PREFIX_MESSAGE} not support package level [${_sPackageLevel}]"
-		exit 1
-	fi
+	git remote add origin ${_sRepositoryUrl}
+	git push -u origin master 
 }
+
+####################################################################
+# create_repository
+####################################################################
+create_repository()
+{
+	touch README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	
+	push_repository
+}
+
 
 ####################################################################
 # BUILD

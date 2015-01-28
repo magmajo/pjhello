@@ -1,9 +1,8 @@
 # http://bower.io/docs/creating-packages/
 
-_sProjectName=$1
+_sCommand=$1
+_sProjectName=$2
+_sRepositoryUrl=$3
 
-# install bower 
-# npm install -g bower
-
-# create bower project
-bower.js create ${_sProjectName} default
+hjjo_git.sh create hjnodejs_express_helloworld https://github.com/magmajo/hjnodejs_express_helloworld
+hjjo_git.sh push hjnodejs_express_helloworld https://github.com/magmajo/hjnodejs_express_helloworld
